@@ -10,8 +10,6 @@ class SimpleLinearRegression:
         self.slope_coef = None
         self.y_intercept = None
 
-        self.num_lines = 0
-
         self.X_values = []
         self.y_values = []
 
@@ -25,10 +23,9 @@ class SimpleLinearRegression:
 
                 self.X_values.append(float(lines[0]))
                 self.y_values.append(float(lines[1]))
-                self.num_lines += 1
 
-        self.X_mean = sum(self.X_values) / self.num_lines
-        self.y_mean = sum(self.y_values) / self.num_lines
+        self.X_mean = sum(self.X_values) / len(self.X_values)
+        self.y_mean = sum(self.y_values) / len(self.y_values)
 
     def fit(self):
         """

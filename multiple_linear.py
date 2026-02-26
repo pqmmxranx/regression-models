@@ -1,7 +1,7 @@
 import csv
 
 
-debug_print = True
+show_debug = True
 
 
 class MultipleLinearRegression:
@@ -51,16 +51,15 @@ class MultipleLinearRegression:
                 multiply_a = matrix_a[num_row]
                 multiply_b = [x[num_col] for x in matrix_b]
 
-                to_multiply_a = multiply_a[num_cell]
-                to_multiply_b = multiply_b[num_cell]
-                
                 for num_cell in range(num_ops):
-                    cell_sum += (
+                    to_multiply_a = multiply_a[num_cell]
+                    to_multiply_b = multiply_b[num_cell]
+                    cell_add = (
                             to_multiply_a * to_multiply_b
                     )
-
-                    if print_debug:
-                        print(f"ROW{num_row} COL{num_col} CELL_SUM{cell_sum:_<22} A{to_multiply_a:_<22} B{to_multiply_b:_<22}")
+                    cell_sum += cell_add
+                    if show_debug:
+                        print(f"ROW{num_row} COL{num_col} {to_multiply_a:_>22} {to_multiply_b:_>22} {cell_add:_>22}")
 
                 product_matrix[num_row][num_col] += cell_sum
 
@@ -141,6 +140,7 @@ class MultipleLinearRegression:
         )
 
         self.coefficients = self._gaussian_eliminate(xtx, xty)
+
         print(self.coefficients)
 
     def predict(self, prediction_values: list):
@@ -156,6 +156,6 @@ class MultipleLinearRegression:
 
 
 if __name__ == "__main__":
-    data_sheet = MultipleLinearRegression("exam_score.csv")
+    data_sheet = MultipleLinearRegression("multiple_linear_regression_50k.csv")
     data_sheet.fit()
-    print(data_sheet.predict([1, 11, 7, 20]))
+    print(data_sheet.predict([1, x1, x2, x3, x4]))

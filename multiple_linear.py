@@ -1,6 +1,9 @@
 import csv
 
 
+debug_print = True
+
+
 class MultipleLinearRegression:
 
     def __init__(self, csv_file):
@@ -48,10 +51,16 @@ class MultipleLinearRegression:
                 multiply_a = matrix_a[num_row]
                 multiply_b = [x[num_col] for x in matrix_b]
 
+                to_multiply_a = multiply_a[num_cell]
+                to_multiply_b = multiply_b[num_cell]
+                
                 for num_cell in range(num_ops):
                     cell_sum += (
-                            multiply_a[num_cell] * multiply_b[num_cell]
+                            to_multiply_a * to_multiply_b
                     )
+
+                    if print_debug:
+                        print(f"ROW{num_row} COL{num_col} CELL_SUM{cell_sum:_<22} A{to_multiply_a:_<22} B{to_multiply_b:_<22}")
 
                 product_matrix[num_row][num_col] += cell_sum
 
